@@ -2,12 +2,15 @@ import React from "react";
 
 import { Route, Switch } from "react-router-dom";
 
+// import presentation components
 import Header from "./components/Header";
 import FourOhFour from "./components/FourOhFour";
 
+// import container components
 import Articles from "./containers/articles/Articles";
 import Article from "./containers/articles/Article";
-import Add from "./components/Articles/Add";
+import Edit from "./containers/articles/Edit";
+import Add from "./containers/articles/Add";
 
 const App = () => (
   <React.Fragment>
@@ -21,6 +24,12 @@ const App = () => (
       <Route exact path="/" component={Articles} /> />
       {/* show the add form - has to come before :id so "add" doesn't get treated as an id  */}
       <Route exact path="/articles/add" component={Add} />
+      {/* show the edit form */}
+      <Route
+        exact
+        path="/articles/:id/edit"
+        render={({ match }) => <Edit id={+match.params.id} />}
+      />
       {/* show an individual article */}
       {/* pass through the id to the container */}
       {/* make sure it's a number with `+` */}
